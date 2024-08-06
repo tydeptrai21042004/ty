@@ -1048,13 +1048,13 @@ function createArrowAtMouse() {
     }
 
     document.addEventListener('keydown', function(e) {
-      //  if (canvas) {
-        //    canvas.on('mouse:move', function(o) {
-          //      var pointer = canvas.getPointer(o.e);
-           //     lastMousePosition.x = pointer.x;
-            //    lastMousePosition.y = pointer.y;
-            //});
-       // }
+        if (canvas) {
+            canvas.on('mouse:move', function(o) {
+                var pointer = canvas.getPointer(o.e);
+                lastMousePosition.x = pointer.x;
+                lastMousePosition.y = pointer.y;
+            });
+        }
 
         if (e.key === 'a' || e.key === 'A') {
             if (!canvas) {
