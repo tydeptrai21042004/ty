@@ -1039,39 +1039,31 @@ var lastMousePosition = { x: 0, y: 0 };
 
 // Function to create an arrow at the mouse position on 'A' keydown
 function createArrowAtMouse() {
-    if (canvas) {
-        canvas.on('mouse:move', function(o) {
-            var pointer = canvas.getPointer(o.e);
-            lastMousePosition.x = pointer.x;
-            lastMousePosition.y = pointer.y;
-        });
-    }
-
+    // Check if canvas is not null
+    //if (!canvas) {
+      //  console.error("Canvas is not initialized.");
+       // return;
+    //}
+    //else {
     document.addEventListener('keydown', function(e) {
-        if (canvas) {
-            canvas.on('mouse:move', function(o) {
-                var pointer = canvas.getPointer(o.e);
-                lastMousePosition.x = pointer.x;
-                lastMousePosition.y = pointer.y;
-            });
-        }
-
+        canvas?.on('mouse:move', function(o) {
+        
+            // if (!canvas) return;
+             var pointer = canvas.getPointer(o.e);
+             lastMousePosition.x = pointer.x;
+             lastMousePosition.y = pointer.y;
+             //console.log(x,y);
+         });
         if (e.key === 'a' || e.key === 'A') {
-            if (!canvas) {
-                console.error("Canvas is not initialized.");
-                return;
-            }
-
             var canvasWidth = canvas.getWidth();
             var canvasHeight = canvas.getHeight();
             var buffer = 70;
 
-            var endX = Math.max(buffer, Math.min(lastMousePosition.x, canvasWidth - buffer));
-            var endY = Math.max(buffer, Math.min(lastMousePosition.y, canvasHeight - buffer));
-            var startX = endX - 100;  // Extend the length of the arrow backwards
-            var startY = endY;
-            console.log(startX, startY);
-            
+            var startX = Math.max(buffer, Math.min(lastMousePosition.x, canvasWidth - buffer));
+            var startY = Math.max(buffer, Math.min(lastMousePosition.y, canvasHeight - buffer));
+            var endX = startX + 100;  // Extend the length of the arrow
+            var endY = startY;
+            console.log(startX,startY);
             var arrow = new fabric.Line([startX, startY, endX, endY], {
                 strokeWidth: 1,  // Make it thin
                 fill: 'red',
@@ -1127,10 +1119,17 @@ function createArrowAtMouse() {
             annotationMap[currentNumber] = arrowGroup;
         }
     });
+     //{
+       // console.error("Canvas is not initialized.");
+         // return;
+     // }
+    
+
+//}
 }
 
-createArrowAtMouse();
 
+createArrowAtMouse();
 
 function drawCircle() {
     var circle, isDown;
