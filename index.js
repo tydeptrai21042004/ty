@@ -1370,6 +1370,7 @@ function deleteSelected() {
         activeObjects.forEach(function(activeObject) {
             if (activeObject.type === 'image') {
                 console.log('Skipped deletion of image:', activeObject);
+                canvas.remove(activeObject);
             } else {
                 var number = parseInt(activeObject.text?.text); // Use optional chaining to avoid errors
                 
